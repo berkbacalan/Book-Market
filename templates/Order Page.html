@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Bil372 Project</title>
+{% endblock %}
+
+{% block body %}
+
+
+    
+<div class="content">
+    
+    <br>
+    <br>
+    <br>
+
+    {% if done == 0 %}
+    <div style="position: absolute; left:50px; top: 50px;">
+        <br>
+    <h2 style="text-align: center;color:#055e79">Payment Info</h2>
+    <hr width="300"|%>
+    <div style="text-align: left;" class="form">
+        <form action="/{{user.user_id}}/payment" method="POST" >
+            <th>Name</th>
+            <input style="position: absolute; right:-10px" type="text" name="name" id="name" placeholder="{{user.name}}" readonly> <br><br>
+            <th>Address</th>
+            <input style="position: absolute; right:-10px" type="text" name="address" id="address" placeholder="{{user.address}}"> <br><br>
+            <th>Email</th> 
+            <input style="position: absolute; right:-10px" type="text" name="email" id="email" placeholder="{{user.email}}">  <br><br>
+            <th>Phone</th> 
+            <input style="position: absolute; right:-10px" type="text" name="phone" id="phone" placeholder="{{user.phone}}">  <br><br>
+
+            
+            <br>
+            <br>
+            <th>Total: {{total}}</th>
+            
+            <input style="font-size: 16px;font-weight: 400;letter-spacing: 0.005em;margin-left: 160px;" type="Submit" value="Finish">
+            
+            
+            
+        </form>
+ 
+    </div>
+    {% endif %}
+
+    {% if done == 1 %}
+    <div style="position: absolute; left:50px; top: 50px;">
+        <br>
+    <h2 style="text-align: center;color:#055e79">Payment Info</h2>
+    <hr width="300"|%>
+    <div style="text-align: left;" class="form">
+        <form action="/{{user.user_id}}/payment" method="POST" >
+            <th>Name</th>
+            <input style="position: absolute; right:-10px" type="text" name="name" id="name" placeholder="{{user.name}}" readonly> <br><br>
+            <th>Address</th>
+            <input style="position: absolute; right:-10px" type="text" name="address" id="address" placeholder="{{user.address}}" readonly> <br><br>
+            <th>Email</th> 
+            <input style="position: absolute; right:-10px" type="text" name="email" id="email" placeholder="{{user.email}}" readonly>  <br><br>
+            <th>Phone</th> 
+            <input style="position: absolute; right:-10px" type="text" name="phone" id="phone" placeholder="{{user.phone}}" readonly>  <br><br>
+
+            
+            <br>
+            <br>
+            <th>Total: {{total}}</th>
+  
+            
+            
+            
+        </form>
+ 
+    </div>
+
+    {% endif %}
+    
+
+    </div>
+
+    <div>
+    {% if books|length < 1 %}
+    <h4 style="text-align: center">There are no books. Create one below!</h4>
+    {% else %}
+    <h2 style="text-align: center;color:#055e79">Selected Books</h2>
+    <hr>
+    <br>
+
+    <table style="height: 10px;  position: absolute; top:160px left:50px;margin-left: 10px;font-size: 14px;">
+        <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Sub Total</th>
+            
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.edition }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.curAmount }}</td>
+                <td>{{ book.subTotal }}</td>
+               
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <br>
+    <br>
+
+</div>
+
+    {% if done == 1 %}
+     <div style="position: absolute; right:120px; top: 50px;">
+    <br>
+    <h2 style="text-align: center;color:#055e79">Payment Done!</h2>
+    <hr width="200"|%>
+    <br>
+    <br>
+    Your order has been added to orders list.
+    <br>
+    <br>
+    <form action="/{{user.user_id}}/" method="GET" >
+    <input style="font-size: 16px;font-weight: 400;letter-spacing: 0.005em;margin-left: 120px;" type="Submit" value="Back">
+    </form>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

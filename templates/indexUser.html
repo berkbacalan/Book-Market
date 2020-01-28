@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Bil372 Project</title>
+{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+
+<div class="content"> 
+    
+
+
+    <br>
+    <br>
+
+    <h2 style="position: absolute; left:0px; top: 75px;text-align: center;color:#055e79; margin-left: 110px; margin-right: 100px;">Shopping Cart</h2>
+
+        <div style="position: absolute; left:0px; top: 50px;" >
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr style = "margin-left: 50px" width="300"|%>
+    {% if booksCart|length > 0 %}
+    <table style="height: 10px; top:160px ;margin-left: 36px;font-size: 14px;">
+        <br>
+        <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in booksCart %}
+            <tr>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.edition }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.curAmount}}</td>
+                <td>
+                    <a href="/{{user.user_id}}/remove/{{book.book_id}}">Remove</a>
+
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+     <form  action="/{{user.user_id}}/payment" method="GET">
+     <input  style="font-size: 16px;font-weight: 400;letter-spacing: 0.005em;margin-left: 120px;" type="Submit" value="Complete Order">
+ </form>
+    {% endif %}
+
+    
+
+    </div>
+
+
+    {% if books|length < 1 %}
+    <h4 style="text-align: center">There are no books. Create one below!</h4>
+    {% else %}
+    <h2 style="text-align: center;color:#055e79">Books</h2>
+    <hr>
+    <br>
+
+    <table style="height: 10px;  position: absolute; top:100px left:100px;margin-left: -50px;font-size: 14px;">
+        <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Category</th>
+            <th>Sale</th>
+            <th>Total Number</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.edition }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.sale }}</td>
+                <td>{{ book.total_number }}</td>
+                <td>{{ book.price }}</td>
+                
+                
+                
+                
+                
+                
+                <td>
+
+
+                    <a href="/{{user.user_id}}/add/{{book.book_id}}">Add to cart</a>
+
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+    </div>
+    <div style="position: absolute; right:80px; top: 50px;">
+    <br>
+    <h2 style="text-align: center;color:#055e79">Search Books</h2>
+    <hr width="200"|%>
+    
+    
+
+     <div style="text-align: center;" class="form">
+        <form  action="/{{user.user_id}}/search" method="POST">
+                <div style="text-align: center;">
+        <input type="checkbox" name="searchBox" default= "0" id="name"  value="1" checked> Book Name </input>
+         <input type="checkbox" name="searchBox" default= "0" id="author"  value="2" > Author </input>
+        <input type="checkbox" name="searchBox" default= "0" id="category" value="3"> Category </input><br> <br>
+    
+    </div>
+            <input type="text" placeholder = "Type something to search" name="search" id="search"> 
+            <input  type="Submit" value="search">
+        </form>
+    </div>
+</div>
+    <br>
+    <br>
+
+   
+
+</div>
+</div>
+
+
+{% endblock %}
